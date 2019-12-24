@@ -46,7 +46,7 @@ public class FileSystem {
 
         if (DirExists(name) != null) {
 
-            return;
+            return; // not here
 
         }
 
@@ -120,7 +120,7 @@ public class FileSystem {
 
             } else if (k <= (FileSystem.fileStorage.countFreeSpace() - file.allocations.length)) { //if there will be enough space free after deleting the old file, do it
 
-                rmfile(name);
+                rmfile(name); // not here
 
             }
 

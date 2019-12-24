@@ -1,7 +1,7 @@
 package system;
 
 public class Main {
-
+/*
     public static void main(String[] args) throws BadFileNameException, OutOfSpaceException {
         FileSystem fs = new FileSystem(10);
 // this creates a file system with 10 disk blocks.
@@ -220,5 +220,5 @@ public class Main {
         }
 
     }
-
+*/
 }
