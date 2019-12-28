@@ -2,10 +2,7 @@ package system1;
 
 import org.junit.Before;
 import org.junit.Test;
-import system.FileSystem;
-import system.Leaf;
-import system.OutOfSpaceException;
-import system.Space;
+import system.*;
 
 import java.util.LinkedList;
 
@@ -23,7 +20,9 @@ public class SpaceTest {
     @Before
     public void initialize() throws OutOfSpaceException, NullPointerException {
         FileSystem.fileStorage=new Space(5);
-        space= FileSystem.fileStorage;
+        //space= FileSystem.fileStorage;
+        //freeBlocks.add(5);
+
 
     }
 
@@ -32,24 +31,43 @@ public class SpaceTest {
 
     @Test
     public void checkAlloc() throws OutOfSpaceException {
-        file = new Leaf("file1",3);
-        space.Alloc(2,file );
+        file = new Leaf("file1",1);
+        FileSystem.fileStorage.Alloc(2,file );
         //space.countFreeSpace();
-        assertEquals(0,space.countFreeSpace());
+        assertEquals(2,FileSystem.fileStorage.countFreeSpace());
     }
     //exception?
     @Test
-    public void checkDealloc(){
-
-        space.Dealloc(file);
-        assertEquals(0,space.countFreeSpace());
+    public void checkDealloc()throws OutOfSpaceException{
+        file = new Leaf("file1",5);
+        Tree tree = new Tree("file");
+        file.parent=tree;
+        FileSystem.fileStorage.Dealloc(file);
+        assertEquals(5,FileSystem.fileStorage.countFreeSpace());
     }
 
     @Test
     public void checkCountFreeSpace() throws OutOfSpaceException {
-        space.Dealloc(file);
-        space.Alloc(5, file);
-        assertEquals(5,space.countFreeSpace());
+        file = new Leaf("file1",5);
+        Tree tree = new Tree("file");
+        file.parent=tree;
+        FileSystem.fileStorage.Dealloc(file);
+        assertEquals(5,FileSystem.fileStorage.countFreeSpace());
+        FileSystem.fileStorage.Alloc(5, file);
+        assertEquals(0,FileSystem.fileStorage.countFreeSpace());
+
+
+    }
+
+    @Test
+    public void checkGetAlloc() throws OutOfSpaceException {
+        file = new Leaf("file1",5);
+        Space space = new Space(5);
+        space.Alloc(2, file);
+
+        //FileSystem.fileStorage.Alloc(2, file);
+        assertEquals(5,space.getAlloc().length);
+
 
     }
 

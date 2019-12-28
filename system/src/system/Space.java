@@ -36,17 +36,13 @@ public class Space {
     public void Alloc(int size, Leaf file) throws OutOfSpaceException {
 
         file.allocations = new int[size];
-
         //we reached this point, therefore there is enough free space
         for (int i = 0; i < size; i++) {
 
             file.allocations[i] = freeBlocks.poll();
             blocks[file.allocations[i]] = file;
-
         }
-
     }
-
     /**
      * Free any space occupied by \c file.
      *

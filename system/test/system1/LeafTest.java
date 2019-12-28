@@ -2,6 +2,7 @@ package system1;
 
 import org.junit.Before;
 import org.junit.Test;
+import system.FileSystem;
 import system.Leaf;
 import system.OutOfSpaceException;
 
@@ -11,10 +12,17 @@ public class LeafTest {
     Leaf leaf;
 
     @Before
-    public void checkLeaf () throws OutOfSpaceException {
-    leaf= new Leaf("file", 5);
-    assertNotNull(leaf);
+    public void initialize () throws OutOfSpaceException {
+        leaf = new Leaf("file1",5);
+        assertNotNull(leaf);
     }
+
+
+    @Test
+    public void initialize1 () throws OutOfSpaceException {
+        assertNotNull(leaf);
+    }
+
 
 
 
