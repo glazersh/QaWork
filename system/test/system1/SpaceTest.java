@@ -24,6 +24,19 @@ public class SpaceTest {
         FileSystem.fileStorage.Alloc(2,file );
         assertEquals(2,FileSystem.fileStorage.countFreeSpace());
     }
+    @Test(expected = OutOfSpaceException.class)
+    public void checkAllocOutOfSpace() throws OutOfSpaceException {
+        file = new Leaf("file1",1);
+        FileSystem.fileStorage.Alloc(6,file );
+
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void checkAllocNullPointerException() throws OutOfSpaceException, NullPointerException {
+        FileSystem.fileStorage.Alloc(6,file );
+
+    }
+
 
     @Test
     public void checkDealloc()throws OutOfSpaceException{
@@ -33,6 +46,17 @@ public class SpaceTest {
         FileSystem.fileStorage.Dealloc(file);
         assertEquals(5,FileSystem.fileStorage.countFreeSpace());
     }
+
+    @Test(expected = NullPointerException.class)
+    public void checkDeallocNullPointer()throws OutOfSpaceException, NullPointerException{
+        file = new Leaf("file1",5);
+        FileSystem.fileStorage.Dealloc(file);
+        assertEquals(5,FileSystem.fileStorage.countFreeSpace());
+    }
+
+
+
+
 
     @Test
     public void checkCountFreeSpace() throws OutOfSpaceException {
@@ -44,6 +68,17 @@ public class SpaceTest {
         FileSystem.fileStorage.Alloc(5, file);
         assertEquals(0,FileSystem.fileStorage.countFreeSpace());
     }
+
+    @Test(expected = NullPointerException.class)
+    public void checkCountFreeSpaceNullPointer() throws OutOfSpaceException,NullPointerException {
+        file = new Leaf("file1",5);
+        FileSystem.fileStorage.Dealloc(file);
+        assertEquals(5,FileSystem.fileStorage.countFreeSpace());
+        FileSystem.fileStorage.Alloc(5, file);
+        assertEquals(0,FileSystem.fileStorage.countFreeSpace());
+    }
+
+
 
     @Test
     public void checkGetAlloc() throws OutOfSpaceException {
