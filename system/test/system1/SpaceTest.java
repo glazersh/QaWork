@@ -2,6 +2,7 @@ package system1;
 
 import org.junit.Before;
 import org.junit.Test;
+import system.FileSystem;
 import system.Leaf;
 import system.OutOfSpaceException;
 import system.Space;
@@ -21,8 +22,9 @@ public class SpaceTest {
 
     @Before
     public void initialize() throws OutOfSpaceException, NullPointerException {
-        space = new Space(5);
-        assertNotNull(new Leaf("file", 5));
+        FileSystem.fileStorage=new Space(5);
+        space= FileSystem.fileStorage;
+
     }
 
 
@@ -30,8 +32,10 @@ public class SpaceTest {
 
     @Test
     public void checkAlloc() throws OutOfSpaceException {
-
-        space.Alloc(5, file);
+        file = new Leaf("file1",3);
+        space.Alloc(2,file );
+        //space.countFreeSpace();
+        assertEquals(0,space.countFreeSpace());
     }
     //exception?
     @Test
