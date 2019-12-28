@@ -37,6 +37,7 @@ public class TreeTest {
         newTree.GetChildByName("dir2");
         assertEquals(1,newTree.children.size());
         assertEquals(1,newTree.parent.children.size());
+        assertEquals("dir1",newTree.getPath()[0]);
     }
 
 }
