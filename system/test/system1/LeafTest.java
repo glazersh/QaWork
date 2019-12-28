@@ -2,10 +2,7 @@ package system1;
 
 import org.junit.Before;
 import org.junit.Test;
-import system.FileSystem;
-import system.Leaf;
-import system.OutOfSpaceException;
-import system.Space;
+import system.*;
 
 import static org.junit.Assert.*;
 
@@ -19,6 +16,8 @@ public class LeafTest {
 
     @Test
     public void newLeaf () throws OutOfSpaceException {
-        leaf = new Leaf("file1",4);
+        assertEquals(5, FileSystem.fileStorage.countFreeSpace());
+        leaf = new Leaf("file1",2);
+        assertEquals(3, FileSystem.fileStorage.countFreeSpace());
     }
 }

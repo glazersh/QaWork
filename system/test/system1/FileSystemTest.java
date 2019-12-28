@@ -20,6 +20,7 @@ public class FileSystemTest {
     String[] file1extra = {"root", "dir1"};
     String[] wrongFile1 = {"root", "file2"};
     String[] directory1 = {"root", "dir1", "dir2"};
+    String[] directory2 = {"root", "dir3", "dir4"};
     String[] deleteDirectory = {"root", "dir1"};
     String[] wrongDirectory1 = {"root", "dir3", "dir4"};
     String[] notRootName = {"noroot"};
@@ -48,6 +49,15 @@ public class FileSystemTest {
         fileSystem.dir(directory1);
         String [] lsdir = fileSystem.lsdir(rootName);
         assertEquals("dir1", lsdir[0]);
+    }
+
+    @Test
+    public void lsdirFunction2() throws BadFileNameException {
+        fileSystem.dir(directory1);
+        fileSystem.dir(directory2);
+        String [] lsdir = fileSystem.lsdir(rootName);
+        assertEquals("dir1", lsdir[0]);
+        assertEquals("dir3", lsdir[1]);
     }
 
     @Test
@@ -106,6 +116,12 @@ public class FileSystemTest {
         fileSystem.file(file1extra, 2);
     }
 
+    @Test
+    public void check() throws OutOfSpaceException, BadFileNameException {
+        fileSystem.file(file1,3);
+        assertEquals("file1",fileSystem.FileExists(file1).getPath()[1]);
+    }
+
     /* Check Disk - function disk */
     @Test
     public void diskFunction() throws OutOfSpaceException, BadFileNameException {
@@ -136,5 +152,11 @@ public class FileSystemTest {
         fileSystem.file(file1, 3);
         fileSystem.rmfile(wrongFile1);
         assertNotNull(fileSystem.FileExists(file1));
+    }
+
+    @Test
+    public void fileExists() throws OutOfSpaceException, BadFileNameException {
+        fileSystem.file(file1,3);
+        assertNull(fileSystem.DirExists(file1));
     }
 }
