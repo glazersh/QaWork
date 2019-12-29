@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import system.BadFileNameException;
 import system.FileSystem;
+import system.Leaf;
 import system.OutOfSpaceException;
 
 import java.nio.file.DirectoryNotEmptyException;
@@ -17,6 +18,7 @@ public class FileSystemTest {
     String[] file1 = {"root", "file1"};
     String[] file2 = {"root", "file2"};
     String[] file3 = {"root", "file3"};
+    String[] file4 = {"root", "dir1", "file1"};
     String[] file1extra = {"root", "dir1"};
     String[] wrongFile1 = {"root", "file2"};
     String[] directory1 = {"root", "dir1", "dir2"};
@@ -36,11 +38,19 @@ public class FileSystemTest {
     @Test
     public void dirFunction() throws BadFileNameException {
         fileSystem.dir(directory1);
+        assertEquals("dir2", fileSystem.lsdir(new String[]{"root","dir1"})[0]);
     }
 
     @Test (expected = BadFileNameException.class)
     public void dirFunctionBadFileNameException() throws BadFileNameException{
         fileSystem.dir(notRootName);
+        assertNull(fileSystem.lsdir(notRootName));
+    }
+
+    @Test (expected = BadFileNameException.class)
+    public void dirFunctionDuplicateFileNameAndDirectory() throws BadFileNameException, OutOfSpaceException {
+        fileSystem.file(file1,3);
+        fileSystem.dir(file1);
     }
 
     /* function lsdir */
@@ -117,7 +127,7 @@ public class FileSystemTest {
     }
 
     @Test
-    public void check() throws OutOfSpaceException, BadFileNameException {
+    public void fileExistsName() throws OutOfSpaceException, BadFileNameException {
         fileSystem.file(file1,3);
         assertEquals("file1",fileSystem.FileExists(file1).getPath()[1]);
     }
@@ -157,6 +167,8 @@ public class FileSystemTest {
     @Test
     public void fileExists() throws OutOfSpaceException, BadFileNameException {
         fileSystem.file(file1,3);
+        fileSystem.dir(directory1);
         assertNull(fileSystem.DirExists(file1));
+        assertNull(fileSystem.FileExists(directory1));
     }
 }
