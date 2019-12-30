@@ -7,7 +7,7 @@ import system.*;
 import static org.junit.Assert.*;
 
 public class LeafTest {
-    Leaf leaf;
+    private Leaf leaf;
 
     @Before
     public void initialize (){
@@ -15,7 +15,7 @@ public class LeafTest {
     }
 
     @Test
-    public void newLeaf () throws OutOfSpaceException {
+    public void checkLeafAndStorage () throws OutOfSpaceException {
         assertEquals(5, FileSystem.fileStorage.countFreeSpace());
         leaf = new Leaf("file1",2);
         assertEquals(3, FileSystem.fileStorage.countFreeSpace());
