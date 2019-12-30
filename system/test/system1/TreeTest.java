@@ -18,13 +18,13 @@ public class TreeTest {
     }
 
     @Test
-    public void getChildByName3() {
+    public void getChildByName() {
         Tree newTree = tree.GetChildByName("dir1");
         assertEquals("dir1",newTree.getPath()[0]);
     }
 
     @Test
-    public void getChildByName4(){
+    public void checkGetChildByNameSizeChildren(){
         String [] files = {"file1", "file2"};
         Tree newTree = tree.GetChildByName("dir1");
         newTree.GetChildByName(files[0]);
