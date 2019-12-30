@@ -99,7 +99,7 @@ public class FileSystemTest {
     }
 
     @Test(expected = BadFileNameException.class)
-    public void fileFunctionBadFileNameException2() throws OutOfSpaceException, BadFileNameException{
+    public void fileFunctionBadFileNameExceptionDirName() throws OutOfSpaceException, BadFileNameException{
         fileSystem.file(file1, 3);
         fileSystem.dir(file1extra);
         fileSystem.file(file1extra, 2);
