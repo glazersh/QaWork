@@ -1,8 +1,7 @@
-package system1;
+package system;
 
 import org.junit.Before;
 import org.junit.Test;
-import system.*;
 
 import static org.junit.Assert.*;
 

@@ -1,10 +1,7 @@
-package system1;
+package system;
 
 import org.junit.Before;
 import org.junit.Test;
-import system.BadFileNameException;
-import system.FileSystem;
-import system.OutOfSpaceException;
 
 import java.nio.file.DirectoryNotEmptyException;
 
